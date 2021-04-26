@@ -1,16 +1,30 @@
 package at.htl;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import at.htl.entity.Person;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-@Path("/hello-resteasy")
+@Path("/hello")
 public class GreetingResource {
+
+    @Inject
+    EntityManager em;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
         return "Hello RESTEasy";
     }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public void createPerson(Person person) {
+        em.merge(person);
+    }
+
 }

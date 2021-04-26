@@ -1,0 +1,14 @@
+
+GET {{host}}/hello
+
+###
+
+POST http://{{host}}/hello
+Content-Type: application/json
+
+{
+  "name": "Susi"
+}
+
+###
+
